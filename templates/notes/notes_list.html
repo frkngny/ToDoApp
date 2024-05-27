@@ -1,0 +1,11 @@
+
+{% for note in notes%}
+    <div class="mb-3">
+        <label>Title</label>
+        <p>{{ note.title }}</p>
+    </div>
+    <div class="mb-3">
+        <label>Body</label>
+        <p>{{ note.body }}</p>
+    </div>
+{% endfor %}

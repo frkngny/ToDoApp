@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block body %}
-<form action="" method="post" style="text-align: left; margin: 0 auto; width: 600px">
+<form action="" method="post">
     {% csrf_token %}
 
     {{ form.as_p }}

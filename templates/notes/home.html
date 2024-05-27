@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+{% load static %}
+
+{% block importscript %}<script src="{% static 'js/htmx.js' %}"></script>{% endblock %}
+{% block body %}
+<form action="{% url 'note-create' %}" method="post">{% csrf_token %}
+    <div class="form-group3">
+        <div class="mb-3">
+            <label>{{ form.title.label_tag }}</label>
+            {% render_field form.title class='form-control'%}
+        </div>
+        <div class="mb-3">
+            <label>{{ form.body.label_tag }}</label>
+            {% render_field form.body class='form-control' rows='3'%}
+        </div>
+    </div>
+
+    <input type="submit" value="Create">
+</form>
+
+<br><br>
+
+<div hx-get="/notes/user_notes" hx-trigger="every 2s">
+
+</div>
+
+
+{% endblock %}
