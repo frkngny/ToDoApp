@@ -1,13 +1,13 @@
 from django.urls import path, include
-from .views import home, create_note, get_user_notes
+from .views import home, create_note, UserNotesList
 
 urlpatterns = [
     path('', home, name='notes-home'),
-    path('/create', create_note, name='note-create'),
 ]
 
 htmxpatterns = [
-    path('/user_notes', get_user_notes, name='user-notes'),
+    path('user-notes', UserNotesList.as_view, name='user-notes'),
+    path('create-note', create_note, name='create-note')
 ]
 
 urlpatterns += htmxpatterns

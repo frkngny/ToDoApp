@@ -1,11 +1,12 @@
-
-{% for note in notes%}
-    <div class="mb-3">
-        <label>Title</label>
-        <p>{{ note.title }}</p>
+{% if notes %}
+    {% for note in notes%}
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+            <h6 class="card-title">{{ note.title }}</h6>
+            <p class="card-text bg-secondary-subtle rounded">{{ note.body }}</p>
+        </div>
     </div>
-    <div class="mb-3">
-        <label>Body</label>
-        <p>{{ note.body }}</p>
-    </div>
-{% endfor %}
+    {% endfor %}
+{% else %}
+    <p>You don't have any notes</p>
+{% endif%}

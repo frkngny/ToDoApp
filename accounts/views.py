@@ -1,9 +1,12 @@
 from typing import Any
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render, redirect
-from django.contrib.auth.views import LoginView, LogoutView
 from django.views.generic import CreateView
+from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth.models import User
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth import logout
+from django.conf import settings
 
 from .forms import RegisterForm
 
@@ -21,6 +24,9 @@ class UserRegister(CreateView):
 class UserLogin(LoginView):
     template_name = 'accounts/login.html'
 
-class UserLogout(LogoutView):
-    def get(self, request: HttpRequest, *args: Any, **kwargs: Any) -> HttpResponse:
-        return redirect('login')
+class UserLogoutView(LogoutView):
+    template_name = 'accounts/logout.html'
+
+def user_logout(request):
+    logout(request)
+    return redirect('%s' % (settings.LOGIN_URL))
