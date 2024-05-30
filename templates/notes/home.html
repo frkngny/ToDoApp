@@ -3,39 +3,10 @@
 {% load static %}
 
 {% block pagetitle %}Notes{% endblock %}
-{% block importscript %}
-<link rel="stylesheet" href="{% static 'css/appstyle.css' %}">
-{% endblock %}
 
 {% block body %}
 
-<form>{% csrf_token %}
-    <div class="form-group3">
-        <div class="card">
-            <div class="card-body">
-                <div>
-                    <label>{{ form.title.label_tag }}</label>
-                    {{ form.title.errors }}
-                    {% render_field form.title class='form-control'%}
-                </div>
-                <div>
-                    <label>{{ form.body.label_tag }}</label>
-                    {{ form.body.errors }}
-                    {% render_field form.body class='form-control' rows='3'%}
-                </div>
-                <div>
-                    <label>{{ form.duedate.label_tag }}</label>
-                    {% render_field form.duedate class='form-control' %}
-                </div>
-            </div>
-            <button style="width: 5rem;" class="btn btn-primary float-md-end"
-                    type="submit"
-                    hx-post="{% url 'create-note' %}"
-                    hx-target="#notes-list">Create</button>
-            <div id="form-errors"></div>
-        </div>
-    </div>
-</form>
+{% include 'notes/create_note.html' %}
 
 <br><br>
 

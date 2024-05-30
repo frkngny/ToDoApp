@@ -14,7 +14,7 @@ from .forms import NoteForm, NoteEditForm
 
 @login_required
 def home(request):
-    return render(request, 'notes/home.html', {'form': NoteForm, 'notes': request.user.notes.all()})
+    return render(request, 'notes/home.html', {'create_from': NoteForm, 'notes': request.user.notes.all()})
 
 
 class UserNotesList(ListView, LoginRequiredMixin):

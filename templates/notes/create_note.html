@@ -1,0 +1,27 @@
+{% load widget_tweaks %}
+<form class="p-2">{% csrf_token %}
+    <div class="form-group3">
+        <div class="card">
+            <div class="card-body">
+                <div>
+                    <label>{{ create_from.title.label_tag }}</label>
+                    {{ create_from.title.errors }}
+                    {% render_field create_from.title class='form-control'%}
+                </div>
+                <div>
+                    <label>{{ create_from.body.label_tag }}</label>
+                    {{ create_from.body.errors }}
+                    {% render_field create_from.body class='form-control' rows='3'%}
+                </div>
+                <div>
+                    <label>{{ create_from.duedate.label_tag }}</label>
+                    {% render_field create_from.duedate class='form-control' %}
+                </div>
+            </div>
+            <button style="width: 5rem;" class="btn btn-primary float-md-end"
+                    type="submit"
+                    hx-post="{% url 'create-note' %}"
+                    hx-target="#notes-list">Create</button>
+        </div>
+    </div>
+</form>

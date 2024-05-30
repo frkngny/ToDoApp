@@ -1,0 +1,31 @@
+<div class="card">
+    <div class="card-body p-2">
+        <div class="list-group-items d-flex justify-content-between align-items-center">
+            <h6 class="card-title ">
+                {{ note.title }}
+            </h6>
+            <div class="btn-group clickable-pointer dropend me-2" role="group">
+                <span class="text-center"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                    ...
+                </span>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a class="dropdown-item" 
+                            hx-delete="{% url 'delete-note' note.pk %}"
+                            hx-confirm="Are you sure?"
+                            hx-target="#notes-list">
+                            Delete
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <p class="card-date">{{ note.created|date:"Y-m-d" }}</p>
+        <p class="card-text text-wrap bg-body-secondary rounded">
+            {{ note.body|truncatechars:200 }}
+        </p>
+        {% if note.duedate %}<p class="card-date">Due: {{ note.duedate|date:"Y-m-d" }}</p>{% endif %}
+    </div>
+</div>
