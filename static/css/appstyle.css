@@ -1,0 +1,9 @@
+.card-date {
+    font-size: 60%;
+    text-wrap: nowrap;
+    font-weight: 100;
+}
+
+.clickable-pointer {
+    cursor: pointer;
+}

@@ -3,9 +3,12 @@
 {% load static %}
 
 {% block pagetitle %}Notes{% endblock %}
-{% block importscript %}<script src="{% static 'js/htmx.js' %}"></script>{% endblock %}
+{% block importscript %}
+<link rel="stylesheet" href="{% static 'css/appstyle.css' %}">
+{% endblock %}
 
 {% block body %}
+
 <form>{% csrf_token %}
     <div class="form-group3">
         <div class="card">
@@ -20,6 +23,10 @@
                     {{ form.body.errors }}
                     {% render_field form.body class='form-control' rows='3'%}
                 </div>
+                <div>
+                    <label>{{ form.duedate.label_tag }}</label>
+                    {% render_field form.duedate class='form-control' %}
+                </div>
             </div>
             <button style="width: 5rem;" class="btn btn-primary float-md-end"
                     type="submit"
@@ -29,7 +36,6 @@
         </div>
     </div>
 </form>
-
 
 <br><br>
 
