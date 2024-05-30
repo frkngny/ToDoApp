@@ -19,6 +19,15 @@
                             Delete
                         </a>
                     </li>
+                    <li>
+                        <a class="dropdown-item"
+                            data-bs-toggle="modal"
+                            data-bs-target="#editNoteModal"
+                            hx-get="{% url 'edit-note' note.pk %}"
+                            hx-target="#editNoteModal">
+                            Edit
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -29,3 +38,4 @@
         {% if note.duedate %}<p class="card-date">Due: {{ note.duedate|date:"Y-m-d" }}</p>{% endif %}
     </div>
 </div>
+

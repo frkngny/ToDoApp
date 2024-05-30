@@ -14,7 +14,7 @@ from .forms import NoteForm, NoteEditForm
 
 @login_required
 def home(request):
-    return render(request, 'notes/home.html', {'create_from': NoteForm, 'notes': request.user.notes.all()})
+    return render(request, 'notes/home.html', {'create_form': NoteForm, 'notes': request.user.notes.all()})
 
 
 class UserNotesList(ListView, LoginRequiredMixin):
@@ -25,7 +25,8 @@ class UserNotesList(ListView, LoginRequiredMixin):
     def get_queryset(self) -> QuerySet[Any]:
         user = self.request.user
         return user.notes.all()
-    
+
+@login_required
 def create_note(request):
     if request.method == 'POST':
         form = NoteForm(request.POST)
@@ -38,15 +39,19 @@ def create_note(request):
         else:
             return HttpResponse(form.errors.__str__())
 
+@login_required
 def edit_note(request, pk):
     note = Note.objects.get(pk=pk)
-    form = NoteEditForm(instance=form)
+    edit_form = NoteEditForm(instance=note)
     if request.method == 'POST':
-        filled_form = NoteEditForm(request.POST, instance=note)
-        if filled_form.is_valid():
-            filled_form.save()
-            form = filled_form
+        filled_edit_form = NoteEditForm(request.POST, instance=note)
+        if filled_edit_form.is_valid():
+            filled_edit_form.save()
+            edit_form = filled_edit_form
+    else:
+        return render(request, 'notes/edit_note.html', {'editable_note': note, 'edit_form': edit_form})
 
+@login_required
 def delete_note(request, pk):
     request.user.notes.get(pk=pk).delete()
     return render(request, 'notes/notes_list.html', {'notes': request.user.notes.all()})

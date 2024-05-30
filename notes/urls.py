@@ -8,7 +8,8 @@ urlpatterns = [
 htmxpatterns = [
     path('user-notes', views.UserNotesList.as_view, name='user-notes'),
     path('create', views.create_note, name='create-note'),
-    path('delete/<int:pk>', views.delete_note, name='delete-note')
+    path('delete/<int:pk>', views.delete_note, name='delete-note'),
+    path('edit/<int:pk>', views.edit_note, name='edit-note'),
 ]
 
 urlpatterns += htmxpatterns
